@@ -58,6 +58,7 @@ body {
 
 a {
     color: var(--color-dark);
+    transition: color 0.3s ease; /* Smooth transition for links */
 }
 
 img {
@@ -300,6 +301,7 @@ main .analyse .progresss .percentage {
     justify-content: center;
     height: 100%;
     width: 100%;
+    font-size: 1rem; /* Adjust font size for better visibility */
 }
 
 main .new-users {
@@ -696,15 +698,3 @@ main .recent-orders a {
     }
 
     .right-section .nav button {
-        display: inline-block;
-        background-color: transparent;
-        cursor: pointer;
-        color: var(--color-dark);
-        position: absolute;
-        left: 1rem;
-    }
-
-    .right-section .nav button span {
-        font-size: 2rem;
-    }
-}
