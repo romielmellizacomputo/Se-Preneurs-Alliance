@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
+/* Root Variables */
 :root {
     --color-primary: #6C9BCF;
     --color-danger: #FF0060;
@@ -22,6 +23,7 @@
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
+/* Dark Mode Variables */
 .dark-mode-variables {
     --color-background: #181a1e;
     --color-white: #202528;
@@ -31,11 +33,12 @@
     --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     outline: 0;
-    appearance: 0;
+    appearance: none;
     border: 0;
     text-decoration: none;
     box-sizing: border-box;
@@ -67,6 +70,7 @@ img {
     object-fit: cover;
 }
 
+/* Headings */
 h1 {
     font-weight: 800;
     font-size: 1.8rem;
@@ -98,6 +102,7 @@ b {
     color: var(--color-info-dark);
 }
 
+/* Utility Classes */
 .primary {
     color: var(--color-primary);
 }
@@ -114,6 +119,7 @@ b {
     color: var(--color-warning);
 }
 
+/* Layout */
 .container {
     display: grid;
     width: 96%;
@@ -126,6 +132,7 @@ aside {
     height: 100vh;
 }
 
+/* Sidebar Styles */
 aside .toggle {
     display: flex;
     align-items: center;
@@ -220,6 +227,7 @@ aside .sidebar .message-count {
     border-radius: var(--border-radius-1);
 }
 
+/* Main Content Styles */
 main {
     margin-top: 1.4rem;
 }
@@ -394,6 +402,7 @@ main .recent-orders a {
     color: var(--color-primary);
 }
 
+/* Right Section Styles */
 .right-section {
     margin-top: 1.4rem;
 }
@@ -719,4 +728,31 @@ main .recent-orders a {
     .right-section .profile .info {
         display: none;
     }
+}
+/* Skeleton Loader Styles */
+.skeleton {
+    background-color: var(--color-light);
+    border-radius: var(--border-radius-1);
+    height: 2rem; /* Height for the skeleton loader */
+    margin: 0.5rem 0;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.progresss {
+    position: relative;
+    width: 76px; /* Adjusted to match SVG size */
+    height: 76px; /* Adjusted to match SVG size */
+    border-radius: 50%;
 }

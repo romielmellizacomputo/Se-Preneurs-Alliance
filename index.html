@@ -8,91 +8,95 @@
     <link rel="stylesheet" href="style.css">
     <title>Se-Preneurs Alliance</title>
     <style>
-        .progress-circle {
-            fill: none;
-            stroke: #4caf50; /* Change to your desired color */
-            stroke-width: 4;
-            transition: stroke-dashoffset 0.5s ease;
-        }
-
-        .percentage {
-            font-family: Arial, sans-serif; /* Ensure the font matches */
-            font-size: 1.2em; /* Adjust the size as needed */
-            text-align: center; /* Center align text */
-        }
-
-        .value {
-            font-family: 'Courier New', monospace; /* Different font for currency */
-            font-size: 2em; /* Adjust the size as needed */
-        }
-
-        svg {
-            transform: rotate(-90deg); /* Rotate the SVG to start from the top */
-        }
-
-        /* Skeleton loading styles */
-        .skeleton {
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            animation: pulse 1.5s infinite;
-            margin: 10px 0;
-        }
-
-        @keyframes pulse {
-            0% {
-                background-color: #e0e0e0;
-            }
-            50% {
-                background-color: #c0c0c0;
-            }
-            100% {
-                background-color: #e0e0e0;
-            }
-        }
-
-        .skeleton.metric {
-            height: 100px;
-            width: 300px;
-            margin: 10px;
-        }
-
-        .skeleton.user {
-            height: 60px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
             display: flex;
-            align-items: center;
-            margin: 10px 0;
         }
 
-        .skeleton.user img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .skeleton.table-row {
-            height: 40px;
+        .container {
             display: flex;
-            align-items: center;
-            margin: 5px 0;
+            width: 100%;
         }
 
-        .skeleton.table-cell {
-            flex: 1;
+        aside {
+            width: 250px; /* Fixed width for sidebar */
+            background: #f4f4f4;
+            position: fixed; /* Fixed position to allow overlay */
             height: 100%;
+            z-index: 1000;
+            transition: transform 0.3s ease;
         }
 
-        .skeleton.sidebar {
-            height: 40px;
+        aside.hidden {
+            transform: translateX(-100%); /* Hide sidebar */
+        }
+
+        .toggle {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: #fff;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .sidebar {
+            padding: 20px;
+        }
+
+        .sidebar a {
             display: flex;
             align-items: center;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #000;
             margin: 5px 0;
         }
 
-        .skeleton.sidebar h3 {
-            width: 150px;
-            height: 20px;
-            margin-left: 10px;
+        .sidebar a.active {
+            background-color: #e0e0e0; /* Highlight active tab */
+        }
+
+        main {
+            margin-left: 250px; /* Offset for sidebar */
+            padding: 20px;
+            flex: 1;
+            transition: margin-left 0.3s ease;
+        }
+
+        .coming-soon {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #888;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            aside {
+                width: 200px; /* Smaller sidebar width on mobile */
+            }
+
+            main {
+                margin-left: 0; /* No margin on mobile */
+                padding: 10px; /* Less padding on mobile */
+            }
+
+            .sidebar {
+                padding: 10px; /* Less padding on mobile */
+            }
+
+            .sidebar a {
+                padding: 10px; /* Adjust link padding */
+            }
+
+            .toggle {
+                justify-content: flex-end; /* Align toggle to the right */
+            }
+        }
+
+        .hidden {
+            display: none; /* Hide sections by default */
         }
     </style>
 </head>
@@ -101,7 +105,7 @@
 
     <div class="container">
         <!-- Sidebar Section -->
-        <aside>
+        <aside id="sidebar">
             <div class="toggle">
                 <div class="logo">
                     <img src="images/logo.png">
@@ -113,141 +117,146 @@
             </div>
 
             <div class="sidebar">
-                <a href="#"><span class="material-icons-sharp">dashboard</span><h3>Dashboard</h3></a>
-                <a href="#"><span class="material-icons-sharp">group</span><h3>Members</h3></a>
-                <a href="#"><span class="material-icons-sharp">monetization_on</span><h3>Investments</h3></a>
-                <a href="#"><span class="material-icons-sharp">account_balance</span><h3>Financials</h3></a>
-                <a href="#"><span class="material-icons-sharp">assignment</span><h3>Proposals</h3></a>
-                <a href="#"><span class="material-icons-sharp">inventory</span><h3>Products</h3></a>
-                <a href="#"><span class="material-icons-sharp">shopping_cart</span><h3>Sales</h3></a> <!-- Moved below Products -->
+                <a href="#" class="active" onclick="showSection('analytics')"><span class="material-icons-sharp">dashboard</span><h3>Dashboard</h3></a>
+                <a href="#" onclick="showSection('members')"><span class="material-icons-sharp">group</span><h3>Members</h3></a>
+                <a href="#" onclick="showSection('investments')"><span class="material-icons-sharp">monetization_on</span><h3>Investments</h3></a>
+                <a href="#" onclick="showSection('financials')"><span class="material-icons-sharp">account_balance</span><h3>Financials</h3></a>
+                <a href="#" onclick="showSection('proposals')"><span class="material-icons-sharp">assignment</span><h3>Proposals</h3></a>
+                <a href="#" onclick="showSection('products')"><span class="material-icons-sharp">inventory</span><h3>Products</h3></a>
+                <a href="#" onclick="showSection('sales')"><span class="material-icons-sharp">shopping_cart</span><h3>Sales</h3></a>
             </div>
         </aside>
         <!-- End of Sidebar Section -->
 
         <!-- Main Content -->
-        <main>
-            <h1>Analytics</h1>
-            <div class="analyse" id="firstAnalyticsSection">
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-            </div>
-            <div class="analyse" id="secondAnalyticsSection">
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-                <div class="skeleton metric"></div>
-            </div>
+        <main id="mainContent">
+            <div id="analytics" class="section">
+                <h1>Analytics</h1>
+                <div class="analyse" id="firstAnalyticsSection">
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                </div>
+                <div class="analyse" id="secondAnalyticsSection">
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                    <div class="skeleton metric"></div>
+                </div>
 
-            <!-- New Users Section -->
-            <div class="new-users">
-                <h2>New Users</h2>
-                <div class="user-list">
-                    <div class="skeleton user">
-                        <img src="images/profile-2.jpg" alt="">
-                        <h2 class="skeleton table-cell"></h2>
-                        <p class="skeleton table-cell"></p>
-                    </div>
-                    <div class="skeleton user">
-                        <img src="images/profile-3.jpg" alt="">
-                        <h2 class="skeleton table-cell"></h2>
-                        <p class="skeleton table-cell"></p>
-                    </div>
-                    <div class="skeleton user">
-                        <img src="images/profile-4.jpg" alt="">
-                        <h2 class="skeleton table-cell"></h2>
-                        <p class="skeleton table-cell"></p>
-                    </div>
-                    <div class="skeleton user">
-                        <img src="images/plus.png" alt="">
-                        <h2 class="skeleton table-cell"></h2>
-                        <p class="skeleton table-cell"></p>
+                <!-- New Users Section -->
+                <div class="new-users">
+                    <h2>New Users</h2>
+                    <div class="user-list">
+                        <div class="skeleton user">
+                            <img src="images/profile-2.jpg" alt="">
+                            <h2 class="skeleton table-cell"></h2>
+                            <p class="skeleton table-cell"></p>
+                        </div>
+                        <div class="skeleton user">
+                            <img src="images/profile-3.jpg" alt="">
+                            <h2 class="skeleton table-cell"></h2>
+                            <p class="skeleton table-cell"></p>
+                        </div>
+                        <div class="skeleton user">
+                            <img src="images/profile-4.jpg" alt="">
+                            <h2 class="skeleton table-cell"></h2>
+                            <p class="skeleton table-cell"></p>
+                        </div>
+                        <div class="skeleton user">
+                            <img src="images/plus.png" alt="">
+                            <h2 class="skeleton table-cell"></h2>
+                            <p class="skeleton table-cell"></p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- End of New Users Section -->
+                <!-- End of New Users Section -->
 
-            <!-- Recent Orders Table -->
-            <div class="recent-orders">
-                <h2>Recent Orders</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Course Name</th>
-                            <th>Course Number</th>
-                            <th>Payment</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="skeleton table-row">
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                        </tr>
-                        <tr class="skeleton table-row">
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                        </tr>
-                        <tr class="skeleton table-row">
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                            <td class="skeleton table-cell"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a href="#">Show All</a>
+                <!-- Recent Orders Table -->
+                <div class="recent-orders">
+                    <h2>Recent Orders</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="skeleton table-row">
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                            </tr>
+                            <tr class="skeleton table-row">
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                            </tr>
+                            <tr class="skeleton table-row">
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                                <td class="skeleton table-cell"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#">Show All</a>
+                </div>
+                <!-- End of Recent Orders -->
             </div>
-            <!-- End of Recent Orders -->
+
+            <div id="members" class="section hidden">
+                <h1>Members Section</h1>
+                <div class="coming-soon">Coming Soon!</div>
+            </div>
+
+            <div id="investments" class="section hidden">
+                <h1>Investments Section</h1>
+                <div class="coming-soon">Coming Soon!</div>
+            </div>
+
+            <div id="financials" class="section hidden">
+                <h1>Financials Section</h1>
+                <div class="coming-soon">Coming Soon!</div>
+            </div>
+
+            <div id="proposals" class="section hidden">
+                <h1>Proposals Section</h1>
+                <div class="coming-soon">Coming Soon!</div>
+            </div>
+
+            <div id="products" class="section hidden">
+                <h1>Products Section</h1>
+                <div class="coming-soon">Coming Soon!</div>
+            </div>
+
+            <div id="sales" class="section hidden">
+                <h1>Sales Section</h1>
+                <div class="coming-soon">Coming Soon!</div>
+            </div>
         </main>
         <!-- End of Main Content -->
 
         <!-- Right Section -->
         <div class="right-section">
             <div class="nav">
-                <button id="menu-btn"><span class="material-icons-sharp">menu</span></button>
+                <button id="menu-btn" onclick="toggleSidebar()"><span class="material-icons-sharp">menu</span></button>
             </div>
-            <!-- End of Nav -->
-
-            <div class="reminders">
-                <div class="header">
-                    <h2>Reminders</h2>
-                    <span class="material-icons-sharp">notifications_none</span>
-                </div>
-
-                <div class="notification">
-                    <div class="icon"><span class="material-icons-sharp">volume_up</span></div>
-                    <div class="content">
-                        <div class="info"><h3>Workshop</h3><small class="text_muted">08:00 AM - 12:00 PM</small></div>
-                        <span class="material-icons-sharp">more_vert</span>
-                    </div>
-                </div>
-
-                <div class="notification deactive">
-                    <div class="icon"><span class="material-icons-sharp">edit</span></div>
-                    <div class="content">
-                        <div class="info"><h3>Workshop</h3><small class="text_muted">08:00 AM - 12:00 PM</small></div>
-                        <span class="material-icons-sharp">more_vert</span>
-                    </div>
-                </div>
-
-                <div class="notification add-reminder">
-                    <div><span class="material-icons-sharp">add</span><h3>Add Reminder</h3></div>
-                </div>
-            </div>
+            <!-- End of Nav -->        
         </div>
     </div>
 
@@ -255,7 +264,7 @@
     <script src="index.js"></script>
     <script>
         function formatCurrency(value) {
-            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ".00";
+            return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // Removed ".00"
         }
 
         function createMetricElement(label, value, percentage) {
@@ -264,7 +273,7 @@
                     <div class="status">
                         <div class="info">
                             <h3>${label}</h3>
-                            <h1 class="value">₱${formatCurrency(value)}</h1>
+                            <h1 class="value">${value}</h1> <!-- Removed currency formatting -->
                         </div>
                         <div class="progresss">
                             <svg width="76" height="76">
@@ -323,13 +332,44 @@
                 const percentage = metrics[index]?.percentage || 0;
                 const offset = circumference - (parseFloat(percentage) / 100 * circumference);
                 circle.style.strokeDashoffset = offset;
+
+                // Set color based on percentage
+                if (percentage >= 80) {
+                    circle.style.stroke = '#1B9C85'; // Green
+                } else if (percentage >= 50) {
+                    circle.style.stroke = '#F7D060'; // Yellow
+                } else {
+                    circle.style.stroke = '#FF0060'; // Red
+                }
             });
         }
 
-        // Initialize the data
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the selected section
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.remove('hidden');
+
+            // Update active link
+            document.querySelectorAll('.sidebar a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`.sidebar a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+
+        // Initialize the data and show the Analytics section by default
         init();
+        showSection('analytics');
     </script>
 </body>
 
 </html>
-
