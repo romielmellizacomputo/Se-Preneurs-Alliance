@@ -304,6 +304,15 @@ main .analyse .progresss .percentage {
     font-size: 1rem; /* Adjust font size for better visibility */
 }
 
+/* Skeleton Loader Styles */
+.skeleton {
+    background-color: var(--color-light);
+    border-radius: var(--border-radius-1);
+    height: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+/* New Users Section */
 main .new-users {
     margin-top: 1.3rem;
 }
@@ -345,6 +354,7 @@ main .new-users .user-list .user img {
     border-radius: 50%;
 }
 
+/* Recent Orders Section */
 main .recent-orders {
     margin-top: 1.3rem;
 }
@@ -390,12 +400,13 @@ main .recent-orders a {
 
 .right-section .nav {
     display: flex;
-    justify-content: end;
-    gap: 2rem;
+    justify-content: space-between; /* Space between button and logo */
+    align-items: center;
+    padding: 0 var(--padding-1);
 }
 
 .right-section .nav button {
-    display: none;
+    display: none; /* Hide the button by default */
 }
 
 .right-section .dark-mode {
@@ -437,6 +448,7 @@ main .recent-orders a {
     overflow: hidden;
 }
 
+/* User Profile Section */
 .right-section .user-profile {
     display: flex;
     justify-content: center;
@@ -465,6 +477,7 @@ main .recent-orders a {
     margin-bottom: 0.2rem;
 }
 
+/* Reminders Section */
 .right-section .reminders {
     margin-top: 2rem;
 }
@@ -541,6 +554,7 @@ main .recent-orders a {
     gap: 0.6rem;
 }
 
+/* Media Queries */
 @media screen and (max-width: 1200px) {
     .container {
         width: 95%;
@@ -687,6 +701,15 @@ main .recent-orders a {
         margin: 0;
     }
 
+    .right-section .nav button {
+        display: block; /* Show the button on mobile */
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        color: var(--color-dark);
+        font-size: 2rem; /* Adjust size for better visibility */
+    }
+
     .right-section .nav .dark-mode {
         width: 4.4rem;
         position: absolute;
@@ -696,5 +719,4 @@ main .recent-orders a {
     .right-section .profile .info {
         display: none;
     }
-
-    .right-section .nav button {
+}

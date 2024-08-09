@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Se-Preneurs Alliance</title>
+    <style>
+        .skeleton {
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            animation: pulse 1.5s infinite;
+            margin: 10px 0;
+        }
+
+        @keyframes pulse {
+            0% {
+                background-color: #e0e0e0;
+            }
+            50% {
+                background-color: #c0c0c0;
+            }
+            100% {
+                background-color: #e0e0e0;
+            }
+        }
+
+        .skeleton.table-row {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+
+        .skeleton.table-cell {
+            flex: 1;
+            height: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        main {
+            flex: 1;
+            margin-right: 20px; /* Space for the right section */
+        }
+
+        .right-section {
+            width: 300px; /* Adjust the width as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Main Content -->
+        <main>
+            <h1>Members</h1>
+            <div class="members-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Profile</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Account Type</th>
+                            <th>Contracts</th>
+                            <th>Shares</th>
+                            <th>Network</th>
+                            <th>Rank</th>
+                        </tr>
+                    </thead>
+                    <tbody id="members-body">
+                        <tr class="skeleton table-row">
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                        </tr>
+                        <tr class="skeleton table-row">
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                        </tr>
+                        <tr class="skeleton table-row">
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                            <td class="skeleton table-cell"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#">Show All</a>
+            </div>
+        </main>
+        <!-- End of Main Content -->
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="nav">
+                <button id="menu-btn"><span class="material-icons-sharp">menu</span></button>
+            </div>
+            <!-- End of Nav -->
+
+            <div class="reminders">
+                <div class="header">
+                    <h2>Reminders</h2>
+                    <span class="material-icons-sharp">notifications_none</span>
+                </div>
+
+                <div class="notification">
+                    <div class="icon"><span class="material-icons-sharp">volume_up</span></div>
+                    <div class="content">
+                        <div class="info"><h3>Workshop</h3><small class="text_muted">08:00 AM - 12:00 PM</small></div>
+                        <span class="material-icons-sharp">more_vert</span>
+                    </div>
+                </div>
+
+                <div class="notification deactive">
+                    <div class="icon"><span class="material-icons-sharp">edit</span></div>
+                    <div class="content">
+                        <div class="info"><h3>Workshop</h3><small class="text_muted">08:00 AM - 12:00 PM</small></div>
+                        <span class="material-icons-sharp">more_vert</span>
+                    </div>
+                </div>
+
+                <div class="notification add-reminder">
+                    <div><span class="material-icons-sharp">add</span><h3>Add Reminder</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="orders.js"></script>
+    <script src="index.js"></script>
+    <script>
+        function init() {
+            fetch('https://script.google.com/macros/s/YOUR_GOOGLE_SHEET_URL/exec') // Update with your Google Sheets URL
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const members = data.members; // Adjust according to your API response
+
+                    // Clear skeletons
+                    document.querySelectorAll('.skeleton.table-row').forEach(skeleton => skeleton.remove());
+                    const membersBody = document.getElementById('members-body');
+
+                    // Populate members table
+                    members.forEach(member => {
+                        const row = `
+                            <tr>
+                                <td><img src="${member.profilePic}" alt="Profile" width="50" height="50"></td>
+                                <td>${member.name}</td>
+                                <td>${member.email}</td>
+                                <td>${member.accountType}</td>
+                                <td>${member.contracts}</td>
+                                <td>${member.shares}</td>
+                                <td>${member.network}</td>
+                                <td>${member.rank}</td>
+                            </tr>
+                        `;
+                        membersBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Initialize the data
+        init();
+    </script>
+</body>
+
+</html>
