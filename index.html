@@ -18,28 +18,21 @@
                     return response.json();
                 })
                 .then(data => {
-                    // Check if metrics are defined
-                    if (data.metrics) {
-                        document.getElementById('totalSales').innerText = data.metrics['Total Sales'] || 'N/A';
-                        document.getElementById('siteVisits').innerText = data.metrics['Site Visit'] || 'N/A';
-                        document.getElementById('searches').innerText = data.metrics['Searches'] || 'N/A';
-                    } else {
-                        console.error('Metrics data is undefined');
-                    }
+                     if (data.metrics) {
+                     // Update total sales
+                     document.getElementById('totalSales').innerText = data.metrics['Total Sales'] || 'N/A';
+                     document.getElementById('totalSalesPercentage').innerText = "+81%"; // Replace with actual logic
 
-                    // Update new users
-                    const userList = document.querySelector('.user-list');
-                    userList.innerHTML = ''; // Clear existing users
-                    if (data.newUsers) {
-                        data.newUsers.forEach(user => {
-                            const userDiv = document.createElement('div');
-                            userDiv.classList.add('user');
-                            userDiv.innerHTML = `<img src="images/profile-2.jpg"><h2>${user.name}</h2><p>${user.joinedTime}</p>`;
-                            userList.appendChild(userDiv);
-                        });
-                    } else {
-                        console.error('New users data is undefined');
-                    }
+                     // Update site visits
+                     document.getElementById('siteVisits').innerText = data.metrics['Site Visit'] || 'N/A';
+                     document.getElementById('siteVisitsPercentage').innerText = "-48%"; // Replace with actual logic
+
+                     // Update searches
+                     document.getElementById('searches').innerText = data.metrics['Searches'] || 'N/A';
+                     document.getElementById('searchesPercentage').innerText = "+21%"; // Replace with actual logic
+                     } else {
+                     console.error('Metrics data is undefined');
+                     }
                 })
                 .catch(error => console.error('Error:', error));
         }
@@ -85,14 +78,14 @@
                     <div class="status">
                         <div class="info">
                             <h3>Total Sales</h3>
-                            <h1 id="totalSales"></h1>
+                            <h1 id="totalSales">Loading...</h1>
                         </div>
                         <div class="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="percentage">
-                                <p></p>
+                                <p id="totalSalesPercentage">Loading...</p> <!-- Placeholder for percentage -->
                             </div>
                         </div>
                     </div>
@@ -100,15 +93,15 @@
                 <div class="visits">
                     <div class="status">
                         <div class="info">
-                            <h3>Site Visit</h3>
-                            <h1 id="siteVisits"></h1>
+                            <h3>Site Visits</h3>
+                            <h1 id="siteVisits">Loading...</h1>
                         </div>
                         <div class="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="percentage">
-                                <p></p>
+                                <p id="siteVisitsPercentage">Loading...</p> <!-- Placeholder for percentage -->
                             </div>
                         </div>
                     </div>
@@ -117,20 +110,21 @@
                     <div class="status">
                         <div class="info">
                             <h3>Searches</h3>
-                            <h1 id="searches"></h1>
+                            <h1 id="searches">Loading...</h1>
                         </div>
                         <div class="progresss">
                             <svg>
                                 <circle cx="38" cy="38" r="36"></circle>
                             </svg>
                             <div class="percentage">
-                                <p></p>
+                                <p id="searchesPercentage">Loading...</p> <!-- Placeholder for percentage -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- End of Analyses -->
+        </main>
 
             <!-- New Users Section -->
             <div class="new-users">
