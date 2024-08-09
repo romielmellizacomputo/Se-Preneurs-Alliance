@@ -100,7 +100,7 @@
                 <div class="sales">
                     <div class="status">
                         <div class="info">
-                            <h3>Total Sales</h3>
+                            <h3 id="totalSalesLabel">Total Sales</h3>
                             <h1 id="totalSales">Loading...</h1>
                         </div>
                         <div class="progresss">
@@ -116,7 +116,7 @@
                 <div class="visits">
                     <div class="status">
                         <div class="info">
-                            <h3>Site Visits</h3>
+                            <h3 id="siteVisitsLabel">Site Visits</h3>
                             <h1 id="siteVisits">Loading...</h1>
                         </div>
                         <div class="progresss">
@@ -132,7 +132,7 @@
                 <div class="searches">
                     <div class="status">
                         <div class="info">
-                            <h3>Searches</h3>
+                            <h3 id="searchesLabel">Searches</h3>
                             <h1 id="searches">Loading...</h1>
                         </div>
                         <div class="progresss">
@@ -301,7 +301,7 @@
     <script src="index.js"></script>
     <script>
         function init() {
-            fetch('https://script.google.com/macros/s/AKfycbxX1DGKYzbuFklQOfO_vM5F7o5jnVYPMxCIZiqXXyK8FoDd2kA1ma-puknWLWizZN4w/exec')
+            fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -309,12 +309,15 @@
                     return response.json();
                 })
                 .then(data => {
-                    document.getElementById('totalSales').innerText = `$${data.metrics['Total Sales'] || 'N/A'}`;
-                    document.getElementById('totalSalesPercentage').innerText = `${data.totalSalesPercentage || 'N/A'}`;
-                    document.getElementById('siteVisits').innerText = `${data.metrics['Site Visit'] || 'N/A'}`;
-                    document.getElementById('siteVisitsPercentage').innerText = `${data.siteVisitsPercentage || 'N/A'}`;
-                    document.getElementById('searches').innerText = `${data.metrics['Searches'] || 'N/A'}`;
-                    document.getElementById('searchesPercentage').innerText = `${data.searchesPercentage || 'N/A'}`;
+                    const metrics = data.metrics;
+
+                    // Update the HTML elements based on the fetched data
+                    document.getElementById('totalSales').innerText = `$${metrics['Total Sales']?.value || 'N/A'}`;
+                    document.getElementById('totalSalesPercentage').innerText = `${metrics['Total Sales']?.percentage || 'N/A'}`;
+                    document.getElementById('siteVisits').innerText = `${metrics['Site Visit']?.value || 'N/A'}`;
+                    document.getElementById('siteVisitsPercentage').innerText = `${metrics['Site Visit']?.percentage || 'N/A'}`;
+                    document.getElementById('searches').innerText = `${metrics['Searches']?.value || 'N/A'}`;
+                    document.getElementById('searchesPercentage').innerText = `${metrics['Searches']?.percentage || 'N/A'}`;
                 })
                 .catch(error => console.error('Error:', error));
         }
