@@ -7,39 +7,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>Se-Preneurs Alliance</title>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function init() {
-            fetch('https://script.google.com/macros/s/AKfycbxX1DGKYzbuFklQOfO_vM5F7o5jnVYPMxCIZiqXXyK8FoDd2kA1ma-puknWLWizZN4w/exec')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                     if (data.metrics) {
-                     // Update total sales
-                     document.getElementById('totalSales').innerText = data.metrics['Total Sales'] || 'N/A';
-                     document.getElementById('totalSalesPercentage').innerText = "+81%"; // Replace with actual logic
-
-                     // Update site visits
-                     document.getElementById('siteVisits').innerText = data.metrics['Site Visit'] || 'N/A';
-                     document.getElementById('siteVisitsPercentage').innerText = "-48%"; // Replace with actual logic
-
-                     // Update searches
-                     document.getElementById('searches').innerText = data.metrics['Searches'] || 'N/A';
-                     document.getElementById('searchesPercentage').innerText = "+21%"; // Replace with actual logic
-                     } else {
-                     console.error('Metrics data is undefined');
-                     }
-                })
-                .catch(error => console.error('Error:', error));
-        }
-    </script>
 </head>
 
-<body onload="init()">
+<body>
 
     <div class="container">
         <!-- Sidebar Section -->
@@ -50,21 +20,74 @@
                     <h2>Se-<span class="danger">PA</span></h2>
                 </div>
                 <div class="close" id="close-btn">
-                    <span class="material-icons-sharp">close</span>
+                    <span class="material-icons-sharp">
+                        close
+                    </span>
                 </div>
             </div>
 
             <div class="sidebar">
-                <a href="#"><span class="material-icons-sharp">dashboard</span><h3>Dashboard</h3></a>
-                <a href="#"><span class="material-icons-sharp">person_outline</span><h3>Users</h3></a>
-                <a href="#"><span class="material-icons-sharp">receipt_long</span><h3>History</h3></a>
-                <a href="#" class="active"><span class="material-icons-sharp">insights</span><h3>Analytics</h3></a>
-                <a href="#"><span class="material-icons-sharp">mail_outline</span><h3>Tickets</h3><span class="message-count">27</span></a>
-                <a href="#"><span class="material-icons-sharp">inventory</span><h3>Sale List</h3></a>
-                <a href="#"><span class="material-icons-sharp">report_gmailerrorred</span><h3>Reports</h3></a>
-                <a href="#"><span class="material-icons-sharp">settings</span><h3>Settings</h3></a>
-                <a href="#"><span class="material-icons-sharp">add</span><h3>New Login</h3></a>
-                <a href="#"><span class="material-icons-sharp">logout</span><h3>Logout</h3></a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        dashboard
+                    </span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        person_outline
+                    </span>
+                    <h3>Users</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        receipt_long
+                    </span>
+                    <h3>History</h3>
+                </a>
+                <a href="#" class="active">
+                    <span class="material-icons-sharp">
+                        insights
+                    </span>
+                    <h3>Analytics</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        mail_outline
+                    </span>
+                    <h3>Tickets</h3>
+                    <span class="message-count">27</span>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        inventory
+                    </span>
+                    <h3>Sale List</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        report_gmailerrorred
+                    </span>
+                    <h3>Reports</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        settings
+                    </span>
+                    <h3>Settings</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        add
+                    </span>
+                    <h3>New Login</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">
+                        logout
+                    </span>
+                    <h3>Logout</h3>
+                </a>
             </div>
         </aside>
         <!-- End of Sidebar Section -->
@@ -124,13 +147,31 @@
                 </div>
             </div>
             <!-- End of Analyses -->
-        </main>
 
             <!-- New Users Section -->
             <div class="new-users">
                 <h2>New Users</h2>
                 <div class="user-list">
-                    <!-- New users will be dynamically added here -->
+                    <div class="user">
+                        <img src="images/profile-2.jpg">
+                        <h2>Jack</h2>
+                        <p>54 Min Ago</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/profile-3.jpg">
+                        <h2>Amir</h2>
+                        <p>3 Hours Ago</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/profile-4.jpg">
+                        <h2>Ember</h2>
+                        <p>6 Hours Ago</p>
+                    </div>
+                    <div class="user">
+                        <img src="images/plus.png">
+                        <h2>More</h2>
+                        <p>New User</p>
+                    </div>
                 </div>
             </div>
             <!-- End of New Users Section -->
@@ -161,11 +202,17 @@
         <div class="right-section">
             <div class="nav">
                 <button id="menu-btn">
-                    <span class="material-icons-sharp">menu</span>
+                    <span class="material-icons-sharp">
+                        menu
+                    </span>
                 </button>
                 <div class="dark-mode">
-                    <span class="material-icons-sharp active">light_mode</span>
-                    <span class="material-icons-sharp">dark_mode</span>
+                    <span class="material-icons-sharp active">
+                        light_mode
+                    </span>
+                    <span class="material-icons-sharp">
+                        dark_mode
+                    </span>
                 </div>
 
                 <div class="profile">
@@ -177,6 +224,7 @@
                         <img src="images/profile-1.jpg">
                     </div>
                 </div>
+
             </div>
             <!-- End of Nav -->
 
@@ -191,38 +239,54 @@
             <div class="reminders">
                 <div class="header">
                     <h2>Reminders</h2>
-                    <span class="material-icons-sharp">notifications_none</span>
+                    <span class="material-icons-sharp">
+                        notifications_none
+                    </span>
                 </div>
 
                 <div class="notification">
                     <div class="icon">
-                        <span class="material-icons-sharp">volume_up</span>
+                        <span class="material-icons-sharp">
+                            volume_up
+                        </span>
                     </div>
                     <div class="content">
                         <div class="info">
                             <h3>Workshop</h3>
-                            <small class="text_muted">08:00 AM - 12:00 PM</small>
+                            <small class="text_muted">
+                                08:00 AM - 12:00 PM
+                            </small>
                         </div>
-                        <span class="material-icons-sharp">more_vert</span>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
                     </div>
                 </div>
 
                 <div class="notification deactive">
                     <div class="icon">
-                        <span class="material-icons-sharp">edit</span>
+                        <span class="material-icons-sharp">
+                            edit
+                        </span>
                     </div>
                     <div class="content">
                         <div class="info">
                             <h3>Workshop</h3>
-                            <small class="text_muted">08:00 AM - 12:00 PM</small>
+                            <small class="text_muted">
+                                08:00 AM - 12:00 PM
+                            </small>
                         </div>
-                        <span class="material-icons-sharp">more_vert</span>
+                        <span class="material-icons-sharp">
+                            more_vert
+                        </span>
                     </div>
                 </div>
 
                 <div class="notification add-reminder">
                     <div>
-                        <span class="material-icons-sharp">add</span>
+                        <span class="material-icons-sharp">
+                            add
+                        </span>
                         <h3>Add Reminder</h3>
                     </div>
                 </div>
@@ -235,6 +299,29 @@
 
     <script src="orders.js"></script>
     <script src="index.js"></script>
+    <script>
+        function init() {
+            fetch('https://script.google.com/macros/s/AKfycbxX1DGKYzbuFklQOfO_vM5F7o5jnVYPMxCIZiqXXyK8FoDd2kA1ma-puknWLWizZN4w/exec')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('totalSales').innerText = `$${data.metrics['Total Sales'] || 'N/A'}`;
+                    document.getElementById('totalSalesPercentage').innerText = `${data.totalSalesPercentage || 'N/A'}`;
+                    document.getElementById('siteVisits').innerText = `${data.metrics['Site Visit'] || 'N/A'}`;
+                    document.getElementById('siteVisitsPercentage').innerText = `${data.siteVisitsPercentage || 'N/A'}`;
+                    document.getElementById('searches').innerText = `${data.metrics['Searches'] || 'N/A'}`;
+                    document.getElementById('searchesPercentage').innerText = `${data.searchesPercentage || 'N/A'}`;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Initialize the data
+        init();
+    </script>
 </body>
 
 </html>
